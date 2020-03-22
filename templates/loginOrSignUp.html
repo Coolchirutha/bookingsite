@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+
+		<title>Login</title>
+	</head>
+
+	<body>
+		<!-- partial:index.partial.html -->
+		<div class="login-page">
+			<div class="form">
+
+
+
+				<!--  Registration Form  -->
+				<form
+					class="register-form"
+					action=" {{ url_for('registrationData') }} "
+					method="POST"
+				>
+					<input
+						name="name"
+						type="text"
+						placeholder="Name"
+						required
+					/>
+					<input
+						name="password"
+						type="password"
+						placeholder="Password"
+						required
+					/>
+					<input
+						name="email"
+						type="text"
+						placeholder="E-Mail Id"
+						required
+					/>
+					<input
+						name="dob"
+						type="text"
+						placeholder="DOB (mm/dd/yyyy)"
+						onfocus="(this.type='date')"
+						onblur="(this.type='text')"
+						required
+					/>
+					<input type="submit" class="myButton" value="create" />
+					<p class="message">
+						Already registered? <a href="#">Sign In</a>
+					</p>
+				</form>
+
+				<!--  Login Form  -->
+				<form
+					class="login-form"
+					action=" {{ url_for('loginData') }} "
+					method="POST"
+				>
+
+
+					<img
+						src="{{ url_for('static', filename='logo.png') }}"
+						alt="company_logo"
+						class="companyLogo"
+					/>
+					<br />
+					<span class="login_header">Sign-In to continue</span> <br />
+
+					<!-- Display error messages -->
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+							{% for message in messages	%}
+								<div
+									class="alert alert-warning alert-dismissible fade show" role="alert">
+										<button class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true" >&times;</span>
+										</button>
+										{{ message }}
+								</div>
+							{% endfor %}
+						{% endif %}
+					{% endwith %}
+					<!-- End of error message -->
+
+					<input
+						name="email"
+						type="text"
+						placeholder="Email-Id"
+						required
+					/>
+					<br />
+					<span class="userType">Select user type : </span>
+					<select name="userType">
+						<option value="customer" selected>Customer</option>
+						<option value="theaterOwner">Theater Owner</option>
+						<option value="admin">Admin</option>
+					</select>
+					<input
+						name="password"
+						type="password"
+						placeholder="Password"
+						required
+					/>
+					<input type="submit" class="myButton" value="login" />
+					<p class="message">
+						Not registered? <a href="#">Create an account</a>
+					</p>
+				</form>
+			</div>
+		</div>
+		<!-- partial -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script>
+			$(".message a").click(function() {
+				$("form").animate(
+					{
+						height: "toggle",
+						opacity: "toggle"
+					},
+					"slow"
+				);
+			});
+		</script>
+	</body>
+</html>
